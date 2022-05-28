@@ -1,0 +1,14 @@
+# DotEnv configuration
+.env
+
+# Pycharm
+.idea/
+
+# VS Code
+.vscode/
+
+#venv
+venv
+
+# git
+.git/
