@@ -1,8 +1,10 @@
 aiohttp==3.6.2
 aiohttp-cors==0.7.0
+mtcnn
+boto3
 mlflow
 numpy
-opencv-python-headless
+tensorflow
 torch
 torchvision
 loguru

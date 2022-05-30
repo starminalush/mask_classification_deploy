@@ -1,9 +1,13 @@
 FROM python:3.10
+RUN apt-get update -y
+RUN apt install libgl1-mesa-glx -y
+RUN apt-get install 'ffmpeg'\
+    'libsm6'\
+    'libxext6'  -y
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . /app
 WORKDIR /app
 expose 5000
-run pip install boto3
 CMD ["python3", "main.py"]
 
