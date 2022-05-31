@@ -15,6 +15,22 @@ services:
     networks:
       - default
 
+  frontend:
+    container_name: frontend
+    build: ./frontend/build
+
+    volumes:
+      - ./frontend/app:/app
+
+    restart: always
+
+    ports:
+      - "5017:8080"
+
+    networks:
+      - default
+
+
 networks:
   default:
     name: mask_detection_default

@@ -18,10 +18,6 @@ mlflow.set_tracking_uri(os.environ['MLFLOW_TRACKING_URI'])
 routes = aiohttp.web.RouteTableDef()
 detector = MTCNN()
 
-model_class = {
-    0: 'with_mask',
-    1: 'without_mask'
-}
 model = mlflow.pytorch.load_model('runs:/6009aae23d044b3ab9302e4283f8d0f1/mobilenet', map_location=torch.device('cpu'))
 model.eval()
 transform = transforms.Compose(
@@ -42,11 +38,14 @@ def prepare_image(image):
 @routes.post('/detect')
 async def detect(request: aiohttp.web.Request):
     logger.info('here')
-    post = await request.post()
-    logger.info(post)
-    image = post.get('image')
+    post = await request.multipart()
+    reader = await request.multipart()
+
+    image = await reader.next()
+    if not image:
+        raise aiohttp.web.HTTPBadRequest(reason='Please provide image file.')
     if image:
-        img_content = image.file.read()  # type: ignore
+        img_content = await  image.read()  # type: ignore
     else:
         return {'error:wrong image'}, 400
 
@@ -62,15 +61,14 @@ async def detect(request: aiohttp.web.Request):
         result = model(image_tensor)
         _, predicted = torch.max(result.data, 1)
         result = predicted.item()
-        crop_class = model_class.get(result)
         img_draw = ImageDraw.Draw(im)
 
         if result == 1:
             outline_color = 'Red'
         else:
             outline_color = 'Green'
-        img_draw.rectangle(((bbox[0], bbox[1]), (bbox[0] + bbox[2], bbox[1] + bbox[3])), outline=outline_color)
-        img_draw.text((bbox[0], bbox[1]), crop_class, fill='green')
+        img_draw.rectangle(((bbox[0], bbox[1]), (bbox[0] + bbox[2], bbox[1] + bbox[3])), outline=outline_color,
+                           width=15)
 
     stream = io.BytesIO()
     im.save(stream, "JPEG")
