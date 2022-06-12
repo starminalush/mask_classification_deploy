@@ -8,3 +8,4 @@ tensorflow
 torch
 torchvision
 loguru
+python-dotenv
