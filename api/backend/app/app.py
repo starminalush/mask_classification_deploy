@@ -5,11 +5,11 @@ from .routes import setup_routes
 
 
 async def startup(app: web.Application):
-    app['http_session'] = ClientSession()
+    app["http_session"] = ClientSession()
 
 
 async def cleanup(app: web.Application):
-    await app['http_session'].close()
+    await app["http_session"].close()
 
 
 async def create_app() -> web.Application:
