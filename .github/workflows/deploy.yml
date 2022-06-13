@@ -48,8 +48,8 @@ jobs:
           echo VERSION=$VERSION
           sudo docker tag api  ghcr.io/starminalush/api:$VERSION
           sudo docker tag frontend  ghcr.io/starminalush/frontend:$VERSION
-          sudo docker push api:$VERSION
-          sudo docker push frontend:$VERSION
+          sudo docker push ghcr.io/starminalush/api:$VERSION
+          sudo docker push ghcr.io/starminalush/frontend:$VERSION
 
 
     
