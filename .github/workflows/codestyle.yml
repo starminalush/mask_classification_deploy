@@ -1,13 +1,14 @@
 # Sets the events which will trigger the Action
 # `push` = any "push" action to the GitHub "remote",
 # changes to any branch will be considered
+name: Check codestyle
 on:
   push:
     branches:
        - '*'
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   # `build` is a user-defined name for this job
