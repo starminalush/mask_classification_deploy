@@ -4,7 +4,6 @@ from typing import List, Tuple
 
 import aiohttp.web
 import cv2 as cv
-import pytest
 import mlflow
 import mxnet as mx
 import numpy as np
@@ -61,8 +60,6 @@ def prepare_image(image: np.ndarray) -> torch.Tensor:
     tensor = transform(image)
     tensor = tensor.unsqueeze(0)
     return tensor
-
-
 
 
 @routes.post("/detect_image")
