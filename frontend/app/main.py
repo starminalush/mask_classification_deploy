@@ -23,8 +23,8 @@ def main():
 
         if image_file is not None:
             img_byte_arr = image_file.read()
-            files = {'image': img_byte_arr}
-            response = requests.post('http://api:5000/detect_image', files=files)
+            files = {"image": img_byte_arr}
+            response = requests.post("http://api:5000/detect_image", files=files)
             if response.status_code == 200:
                 logger.info(response.content)
                 # To View Uploaded Image
