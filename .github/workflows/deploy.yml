@@ -28,7 +28,7 @@ jobs:
 
       - name: Build image
         run: |
-          sudo docker build frontend/build/ --tag frontend--label "runnumber=${GITHUB_RUN_ID}"
+          sudo docker build frontend/build/ --tag frontend --label "runnumber=${GITHUB_RUN_ID}"
           sudo docker build api/build/ --tag api --label "runnumber=${GITHUB_RUN_ID}"
 
       - name: Log in to registry
