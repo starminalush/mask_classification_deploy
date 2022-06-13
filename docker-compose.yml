@@ -1,0 +1,36 @@
+version: "2.4"
+services:
+  api:
+    container_name: api
+    build: ./api/build
+
+    volumes:
+      - ./api/backend:/app
+
+    restart: always
+
+    ports:
+      - "5016:5000"
+
+    networks:
+      - default
+
+  frontend:
+    container_name: frontend
+    build: ./frontend/build
+
+    volumes:
+      - ./frontend/app:/app
+
+    restart: always
+
+    ports:
+      - "5017:8080"
+
+    networks:
+      - default
+
+
+networks:
+  default:
+    name: mask_detection_default

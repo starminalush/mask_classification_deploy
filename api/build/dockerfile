@@ -1,0 +1,16 @@
+FROM python:3.10
+RUN apt-get update -y
+RUN apt install libgl1-mesa-glx -y
+RUN apt-get install 'ffmpeg'\
+    'libsm6'\
+    'libxext6'  -y
+COPY requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+RUN pip install mxnet
+COPY .env .
+COPY . /app
+WORKDIR /app
+expose 5000
+CMD ["python3", "main.py"]
+
