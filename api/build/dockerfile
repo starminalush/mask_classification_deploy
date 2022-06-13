@@ -7,6 +7,7 @@ RUN apt-get install 'ffmpeg'\
 COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+RUN pip install mxnet
 COPY .env .
 COPY . /app
 WORKDIR /app
