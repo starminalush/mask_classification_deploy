@@ -58,6 +58,16 @@ def prepare_image(image: np.ndarray) -> torch.Tensor:
 
 @routes.post('/detect_image')
 async def detect_image(request: aiohttp.web.Request):
+    """
+    метод, который получает картинку, находит на ней лица,
+    определяет, если ли на каждом нвйденном лице маска и
+    возвращает в ответ картинку с нарисованными bbox
+    и метками класса возле каждого лица
+    :param request: входные данные http запроса
+    :type request: aiohttp.web.Request
+    :return: image if success, else status code >= 400
+    :rtype:
+    """
     reader = await request.multipart()
 
     image = await reader.next()
