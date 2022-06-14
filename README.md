@@ -1,4 +1,4 @@
-# mask_detection_deploy
+# mask_classification_deploy
 
 Сервисы для деплоя обученной модели классификации масок
 
